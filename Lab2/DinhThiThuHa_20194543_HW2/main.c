@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 #include <sys/socket.h>
 #include <netdb.h>
 #include <netinet/in.h>
@@ -14,8 +16,8 @@ void byName(char *name)
 
     he = gethostbyname(name);
     if (he == NULL)
-    {                            // do some error checking
-        herror("gethostbyname"); // herror(), NOT perror()
+    { // do some error checking
+        printf("Not found information\n");
         exit(1);
     }
 
@@ -40,8 +42,8 @@ void byAddress(char *address)
     inet_aton(address, &addr);
     he = gethostbyaddr(&addr, sizeof(addr), AF_INET);
     if (he == NULL)
-    {                            // do some error checking
-        herror("gethostbyaddr"); // herror(), NOT perror()
+    { // do some error checking
+        printf("Not found infomation\n");
         exit(1);
     }
     printf("IP Address: %s\n", inet_ntoa(*(struct in_addr *)he->h_addr));
@@ -58,16 +60,42 @@ void byAddress(char *address)
 
 int main(int agrc, char **argv)
 {
-
+    if (agrc != 3)
+    {
+        printf("Wrong number of parameter!!!\n");
+        exit(1);
+    }
     int i;
     struct hostent *he;
     struct in_addr **addr_list;
     struct in_addr addr;
 
-    if (argv[1][0] >= '0' && argv[1][0] <= '9')
+    if (argv[1][0] == '1')
     {
-        byAddress(argv[1]);
+        if (argv[2][0] >= '0' && argv[2][0] <= '9')
+        {
+            byAddress(argv[2]);
+        }
+        else
+        {
+            printf("Wrong parameter\n");
+            exit(1);
+        }
+    }
+    else if (argv[1][0] == '2')
+    {
+        if (tolower(argv[2][0]) >= 'a' && tolower(argv[2][0]) <= 'z')
+        {
+            byName(argv[2]);
+        }
+        else
+        {
+            printf("Wrong parameter\n");
+            exit(1);
+        }
     }
     else
-        byName(argv[1]);
+    {
+        printf("Wrong parameter\n");
+    }
 }
