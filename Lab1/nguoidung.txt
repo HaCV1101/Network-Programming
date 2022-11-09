@@ -1,7 +1,2 @@
-hedspi1 hedpsi2016 0
-hust hust12345 1
-soict soictfit 1
-it4062 123456 0
-haxinh 1101 2
 ha 123 1
-haha 1101 1
+haxinh 1101 1
