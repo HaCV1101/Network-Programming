@@ -65,6 +65,11 @@ int main(int agrc, char **argv)
         printf("Wrong number of parameter!!!\n");
         exit(1);
     }
+    if (strlen(argv[1])!= 1)
+    {
+        printf("Wrong parameter\n");
+        exit(1);
+    }
     int i;
     struct hostent *he;
     struct in_addr **addr_list;
@@ -82,7 +87,7 @@ int main(int agrc, char **argv)
             exit(1);
         }
     }
-    else if (argv[1][0] == '2')
+    else if (argv[1][0] == '2' && strlen(argv[1]) == 1)
     {
         if (tolower(argv[2][0]) >= 'a' && tolower(argv[2][0]) <= 'z')
         {

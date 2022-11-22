@@ -1,0 +1,3 @@
+newAcc 3456 1
+one not123 1
+nono pass 0
